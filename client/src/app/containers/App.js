@@ -10,7 +10,7 @@ export class App extends React.Component {
 		}
 
 		subscribeToTimer((err, timestamp) => {
-			this.setState({timestamp})
+			this.setState({ timestamp })
 		});
 	}
 
