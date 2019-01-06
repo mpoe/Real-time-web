@@ -5,3 +5,5 @@ Starting the server from scratch:
 
 After this has been set up, all that is left is to run
 node app.js
+
+The server is currently hosted on port 8000
