@@ -2,7 +2,9 @@ import React from 'react';
 import { subscribeToTimer } from '../api/api';
 import {App} from '../components/App';
 
-export class AppContainer extends React.Component {
+import {connect} from 'react-redux'
+
+class AppContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -23,7 +25,22 @@ export class AppContainer extends React.Component {
 		return (
 			<App
 				timer={this.state.timestamp}
+				state={this.props.state}
 			/>
 		);
 	}
 }
+
+const mapStateToProps = function(state) {
+  return {
+    state: state,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+	return({
+			/* sendTheAlert: () => {dispatch(ALERT_ACTION)} */
+	})
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(AppContainer);
