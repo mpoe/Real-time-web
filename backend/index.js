@@ -16,6 +16,11 @@ app.get('/', function (req, res) {
 })
 
 io.on('connection', (client) => {
+  client.on('GET_ID', () => {
+    console.log('HERE');
+    client.emit('getID', client.id);
+  })
+
   client.on('subscribeToTimer', (interval) => {
     console.log('client is subscribing to timer with interval ', interval);
     setInterval(() => {
@@ -24,11 +29,11 @@ io.on('connection', (client) => {
   });
   client.broadcast.emit('user connected');
   client.on('disconnect', (test) => {
-    console.log('ABD');
+    // console.log('ABD');
   })
 
   client.on('disconnecting', (test) => {
-    console.log('DISCONNECT');
+    //console.log('DISCONNECT');
   })
 });
 

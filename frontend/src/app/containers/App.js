@@ -1,5 +1,5 @@
 import React from 'react';
-import { subscribeToTimer } from '../api/api';
+import { subscribeToTimer, getClientID } from '../api/api';
 import {App} from '../components/App';
 
 import {connect} from 'react-redux'
@@ -14,10 +14,7 @@ class AppContainer extends React.Component {
 	}
 
 	componentDidMount() {
-		/* subscribeToTimer((err, timestamp) => {
-			this.setState({ timestamp })
-		}); */
-
+		getClientID();
 	}
 
 

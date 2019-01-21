@@ -1,5 +1,7 @@
 import openSocket from 'socket.io-client';
 
+import { store } from '../redux/reducers'; //CHECK!
+
 const socket = openSocket('http://localhost:8000');
 
 export function subscribeToTimer(cb) {
@@ -7,6 +9,13 @@ export function subscribeToTimer(cb) {
   socket.emit('subscribeToTimer', 1000);
 }
 
-socket.on('user connected', (data) => {
-  console.log('test');
-})
+export function getClientID() {
+  socket.emit('GET_ID');
+}
+
+socket.on('getID', (clientID) => {
+  store.dispatch({
+    type: 'TEST_ME',
+    payload: clientID,
+  });
+});

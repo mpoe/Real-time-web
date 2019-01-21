@@ -1,7 +1,20 @@
-import { combineReducers } from 'redux';
+
+import { createStore, applyMiddleware, combineReducers } from 'redux'
+import { createLogger } from 'redux-logger';
 
 import {testReducer} from './testReducer';
 
-export const combinedStore = combineReducers({
+const reducer = combineReducers({
   testReducer,
 })
+
+const logger = createLogger({
+
+});
+
+export const store = createStore(
+  reducer,
+  applyMiddleware(
+    logger,
+  )
+);
