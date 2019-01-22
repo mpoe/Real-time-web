@@ -6,36 +6,46 @@ var fs = require('fs');
 
 const port = 8000;
 
+var dbcon = require('./db'); // connection to the database
+dbcon.connect(); // connect to the database, this will happen on server start.
+
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
-  fs.writeFile(__dirname + '/start.log', 'started', (error) => { console.log(error) });
+  //fs.writeFile(__dirname + '/start.log', 'started', (error) => { console.log(error) });
 });
 
-app.get('/', function (req, res) {
-  res.send('hello world')
-})
-
 io.on('connection', (client) => {
+  dbcon.test(client.id); // inserts the clients id to the database (useless)
+
   client.on('GET_ID', () => {
     console.log('HERE');
     client.emit('getID', client.id);
   })
 
-  client.on('subscribeToTimer', (interval) => {
-    console.log('client is subscribing to timer with interval ', interval);
-    setInterval(() => {
-      client.emit('timer', new Date());
-    }, interval);
-  });
-  client.broadcast.emit('user connected');
-  client.on('disconnect', (test) => {
+
+  //client.broadcast.emit('user connected'); //? Not working
+  client.on('disconnect', (test) => { //event listener
     // console.log('ABD');
   })
 
-  client.on('disconnecting', (test) => {
+  client.on('disconnecting', (test) => { //event listener
     //console.log('DISCONNECT');
   })
 });
 
 
-console.log('listening on port ', 8000);
+
+
+/* ################ LEGACY EXAMPLES, WORKING CODE */
+
+/* app.get('/', function (req, res) {
+  res.send('hello world')
+}) */
+
+
+  /* client.on('subscribeToTimer', (interval) => {
+    console.log('client is subscribing to timer with interval ', interval);
+    setInterval(() => {
+      client.emit('timer', new Date());
+    }, interval);
+  }); */

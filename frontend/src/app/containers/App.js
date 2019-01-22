@@ -14,7 +14,7 @@ class AppContainer extends React.Component {
 	}
 
 	componentDidMount() {
-		getClientID();
+		getClientID(); //On load of the app (first page!) - get the clientid from the backend
 	}
 
 

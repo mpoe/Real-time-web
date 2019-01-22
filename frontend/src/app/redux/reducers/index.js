@@ -2,15 +2,13 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { createLogger } from 'redux-logger';
 
-import {testReducer} from './testReducer';
+import {user} from './user';
 
 const reducer = combineReducers({
-  testReducer,
+  user,
 })
 
-const logger = createLogger({
-
-});
+const logger = createLogger({/* Empty */});
 
 export const store = createStore(
   reducer,

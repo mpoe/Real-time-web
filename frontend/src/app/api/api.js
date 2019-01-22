@@ -1,4 +1,5 @@
 import openSocket from 'socket.io-client';
+import { setUsername, setUserid } from '../redux/actions/index';
 
 import { store } from '../redux/reducers'; //CHECK!
 
@@ -14,8 +15,6 @@ export function getClientID() {
 }
 
 socket.on('getID', (clientID) => {
-  store.dispatch({
-    type: 'TEST_ME',
-    payload: clientID,
-  });
+  store.dispatch(setUserid(clientID));
 });
+
