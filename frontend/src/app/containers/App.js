@@ -8,9 +8,9 @@ class AppContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
+		/* this.state = {
 			timestamp: 'no timestamp yet',
-		}
+		} */
 	}
 
 	componentDidMount() {
@@ -21,7 +21,7 @@ class AppContainer extends React.Component {
 	render() {
 		return (
 			<App
-				timer={this.state.timestamp}
+				// timer={this.state.timestamp}
 				state={this.props.state}
 			/>
 		);
