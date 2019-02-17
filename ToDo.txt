@@ -13,8 +13,10 @@ Quick join lobby (game should not be in progress, if no open lobbies, create one
 Create/join private game
 Find a lobby (list of open lobbies)
 
-
-
+Implement and use these libraries:
+🗸 Sass + loader
+☐ Redux-saga
+☐ Look into tmux!
 
 
 
