@@ -4,6 +4,6 @@ Starting the server from scratch:
 2 run the command npm i
 
 After this has been set up, all that is left is to run
-node app.js
+node index.js
 
 The server is currently hosted on port 8000

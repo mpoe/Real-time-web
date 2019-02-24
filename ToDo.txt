@@ -1,0 +1,24 @@
+https://www.pinturillo2.com/
+
+Implement same flow as pinturillo2,
+
+
+
+Set a username -- if the username is on the list of users, add an integer at the end
+// Might want to register as a user for X reason?
+
+After setting the username you now have the option between: 
+
+Quick join lobby (game should not be in progress, if no open lobbies, create one)
+Create/join private game
+Find a lobby (list of open lobbies)
+
+Implement and use these libraries:
+🗸 Sass + loader
+☐ Redux-saga
+☐ Look into tmux!
+
+
+
+//BACKEND
+If no players in lobby, remove it
