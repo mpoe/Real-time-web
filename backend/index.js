@@ -17,9 +17,13 @@ server.listen(port, function () {
 io.on('connection', (client) => {
   dbcon.test(client.id); // inserts the clients id to the database (useless)
 
-  client.on('GET_ID', () => {
-    console.log('HERE');
-    client.emit('getID', client.id);
+  client.on('GET_ID_REQ', () => {
+    client.emit('GET_ID_RES', client.id);
+  })
+
+  client.on('SET_USERNAME_REQ', (username) => {
+    client.username = username;
+    client.emit('SET_USERNAME_RES', client.username);
   })
 
 
