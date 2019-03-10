@@ -22,8 +22,19 @@ io.on('connection', (client) => {
   })
 
   client.on('SET_USERNAME_REQ', (username) => {
-    client.username = username;
-    client.emit('SET_USERNAME_RES', client.username);
+    io.clients((error, clients) => {
+      if (error) throw error;
+      clients.map((cliId) => {
+        if(cliId !== client.id) {
+          if(io.sockets.connected[cliId].username === username) {
+            username = username + clients.length;
+          }
+        }
+      });
+
+      client.username = username;
+      client.emit('SET_USERNAME_RES', client.username);
+    });
   })
 
 
@@ -36,20 +47,3 @@ io.on('connection', (client) => {
     //console.log('DISCONNECT');
   })
 });
-
-
-
-
-/* ################ LEGACY EXAMPLES, WORKING CODE */
-
-/* app.get('/', function (req, res) {
-  res.send('hello world')
-}) */
-
-
-  /* client.on('subscribeToTimer', (interval) => {
-    console.log('client is subscribing to timer with interval ', interval);
-    setInterval(() => {
-      client.emit('timer', new Date());
-    }, interval);
-  }); */

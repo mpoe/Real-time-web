@@ -1,4 +1,4 @@
 d:
 cd develop/Merchant/backend
-node index.js
+nodemon
 cmd /k
