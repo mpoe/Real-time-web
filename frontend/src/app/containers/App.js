@@ -1,43 +1,37 @@
 import React from 'react';
-import { subscribeToTimer, getClientID } from '../api/api';
-import {App} from '../components/App';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import {connect} from 'react-redux'
+import { getClientID } from '../api/api';
+import App from '../components/App';
+
 
 class AppContainer extends React.Component {
-	constructor(props) {
-		super(props);
-
-		/* this.state = {
-			timestamp: 'no timestamp yet',
-		} */
-	}
-
 	componentDidMount() {
 		getClientID(); //On load of the app (first page!) - get the clientid from the backend
 	}
 
-
 	render() {
+		const { state } = this.props;
 		return (
 			<App
 				// timer={this.state.timestamp}
-				state={this.props.state}
+				state={state}
 			/>
 		);
 	}
 }
 
-const mapStateToProps = function(state) {
-  return {
-    state: state,
-  }
-}
+AppContainer.propTypes = {
+	state: PropTypes.object.isRequired,
+};
 
-function mapDispatchToProps(dispatch) {
-	return({
-			/* sendTheAlert: () => {dispatch(ALERT_ACTION)} */
-	})
-}
+const mapStateToProps = state => ({
+	state,
+});
 
-export default connect(mapStateToProps,mapDispatchToProps)(AppContainer);
+const mapDispatchToProps = dispatch => ({
+	/* sendTheAlert: () => {dispatch(ALERT_ACTION)} */
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

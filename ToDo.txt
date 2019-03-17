@@ -2,8 +2,6 @@ https://www.pinturillo2.com/
 
 Implement same flow as pinturillo2,
 
-
-
 Set a username -- if the username is on the list of users, add an integer at the end
 // Might want to register as a user for X reason?
 
@@ -17,7 +15,9 @@ Implement and use these libraries:
 🗸 Sass + loader
 ☐ Redux-saga
 🗸 Look into tmux!
-
+☐ set up react-router
+🗸 set up eslint file
+☐ use ts-check
 
 
 //BACKEND

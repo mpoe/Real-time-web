@@ -1,4 +1,4 @@
-
+// @ts-check
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server, { origins: 'localhost:* http://localhost:* http://localhost:*' }); //https://github.com/socketio/socket.io-client/issues/641#issuecomment-44756529
@@ -32,8 +32,8 @@ io.on('connection', (client) => {
         }
       });
 
-      client.username = username;
-      client.emit('SET_USERNAME_RES', client.username);
+			client.username = username;
+      client.emit('SET_USERNAME_RES', username);
     });
   })
 

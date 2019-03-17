@@ -1,28 +1,22 @@
 import openSocket from 'socket.io-client';
 import { setUsername, setUserid } from '../redux/actions/index';
 
-import { store } from '../redux/reducers'; //CHECK!
+import store from '../redux/reducers';
 
 const socket = openSocket('http://localhost:8000');
 
-/* export function subscribeToTimer(cb) {
-  socket.on('timer', timestamp => cb(null, timestamp));
-  socket.emit('subscribeToTimer', 1000);
-} */
-
 export function getClientID() {
-  socket.emit('GET_ID_REQ');
+	socket.emit('GET_ID_REQ');
 }
 
 socket.on('GET_ID_RES', (clientID) => {
-  store.dispatch(setUserid(clientID));
+	store.dispatch(setUserid(clientID));
 });
 
 export function setUserName(username) {
-  socket.emit('SET_USERNAME_REQ', username);
+	socket.emit('SET_USERNAME_REQ', username);
 }
 
 socket.on('SET_USERNAME_RES', (username) => {
-  store.dispatch(setUsername(username));
-})
-
+	store.dispatch(setUsername(username));
+});
