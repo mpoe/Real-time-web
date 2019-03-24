@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import './App.scss';
-import { setUserName } from '../api/api';
+import './namepicker.scss';
+import { setUserName } from '../../api';
 
-export default class App extends React.Component {
+export default class NamePicker extends React.Component {
 	handleInput = (e) => {
 		if (e.key === 'Enter') {
 			this.submit(e, e.target.value);

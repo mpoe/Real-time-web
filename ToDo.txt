@@ -15,9 +15,10 @@ Implement and use these libraries:
 🗸 Sass + loader
 ☐ Redux-saga
 🗸 Look into tmux!
-☐ set up react-router
+🗸 set up react-router
 🗸 set up eslint file
 ☐ use ts-check
+☐ make app redirect if condition is not met
 
 
 //BACKEND
