@@ -1,7 +1,7 @@
 {
-  "name": "joe",
-  "version": "1.0.0",
-  "repository": "https://github.com/mpoe/Joe",
+  "name": "Merchant",
+  "version": "0.0.3",
+  "repository": "https://github.com/mpoe/Merchant",
   "description": "quick project",
   "main": "index.js",
   "scripts": {
