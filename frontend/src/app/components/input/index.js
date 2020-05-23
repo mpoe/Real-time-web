@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
-const CustomInput = ({value, name, onChange, placeholder}) => (
-    <input value={value} name={name} onChange={onChange} placeholder={placeholder} />
+import './input.scss';
+
+const CustomInput = ({value, name, onChange, placeholder, className, containerClass, labelClass}) => (
+    <div className={classnames('textinput__container', containerClass)}>
+        <label className={classnames("textinput__label", labelClass)}>Label</label>
+        <input className={classnames('textinput', className)} value={value} name={name} onChange={onChange} placeholder={placeholder} />
+    </div>
 )
 
 CustomInput.propTypes = {
@@ -10,11 +16,17 @@ CustomInput.propTypes = {
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
+    className: PropTypes.string,
+    containerClass: PropTypes.string,
+    labelClass: PropTypes.string,
 }
 
 CustomInput.defaultProps = {
     onChange: null,
     placeholder: 'placeholder',
+    className: '',
+    containerClass: '',
+    labelClass: '',
 }
 
 export default CustomInput;

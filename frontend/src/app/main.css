@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Lovelyn';
+    src: local('Lovelyn'), url('../../assets/Lovelyn.ttf') format('truetype');
+  }
+
 body {
     margin: 0;
     display: flex;

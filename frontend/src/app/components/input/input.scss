@@ -1,0 +1,18 @@
+.textinput {
+    border-color: black;
+    border-width: 2px;
+    background-color: transparent;
+    height: 50px;
+    display: flex;
+    flex: 1;
+
+    &__container {
+        display: flex;
+        flex: 1;
+    }
+
+    &__label {
+        display: flex;
+        flex: 1;
+    }
+}

@@ -1,12 +1,12 @@
 .namepicker {
-    padding-top: 25%;
+    padding-top: 31%;
     display: flex;
     flex-direction: column;
-    align-self: flex-end;
-	align-items: flex-end;
-	padding-right: 10%;
+    padding-right: 11%;
+    padding-left: 55%;
 
 	&__title {
+		font-family: 'lovelyn';
 		font-size: 5em;
 	}
 	
@@ -16,5 +16,9 @@
 		background-position: center center;
 		background-size: contain;
 		background-repeat: no-repeat;
+	}
+
+	&__input-container {
+		margin-bottom: 91px;
 	}
 }
