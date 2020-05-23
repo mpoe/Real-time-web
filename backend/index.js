@@ -6,16 +6,7 @@ var fs = require('fs');
 
 const port = 8000;
 
-var mysql = require('mysql');
-
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "admin",
-  password: ""
-});
-
-
-dbcon = require('./db'); // connection to the database
+const dbcon = require('./db'); // connection to the database
 dbcon.connect((err) => {
   console.log('connect');
 }); // connect to the database, this will happen on server start.
@@ -26,9 +17,9 @@ server.listen(port, function () {
 });
 
 io.on('connection', (client) => {
-  dbcon.test(); // inserts the clients id to the database (useless)
-
+  // dbcon.test(); // inserts the clients id to the database (useless)
   client.on('GET_ID_REQ', () => {
+    console.log(client.id);
     client.emit('GET_ID_RES', client.id);
   })
 
