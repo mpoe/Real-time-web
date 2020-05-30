@@ -4,9 +4,9 @@ import classnames from 'classnames';
 
 import './input.scss';
 
-const CustomInput = ({value, name, onChange, placeholder, className, containerClass, labelClass}) => (
+const CustomInput = ({value, name, onChange, placeholder, className, containerClass, labelClass, labelText}) => (
     <div className={classnames('textinput__container', containerClass)}>
-        <label className={classnames("textinput__label", labelClass)}>Label</label>
+        <label className={classnames("textinput__label", labelClass)}>{labelText}</label>
         <input className={classnames('textinput', className)} value={value} name={name} onChange={onChange} placeholder={placeholder} />
     </div>
 )
@@ -19,6 +19,7 @@ CustomInput.propTypes = {
     className: PropTypes.string,
     containerClass: PropTypes.string,
     labelClass: PropTypes.string,
+    labelText: PropTypes.string,
 }
 
 CustomInput.defaultProps = {
@@ -27,6 +28,7 @@ CustomInput.defaultProps = {
     className: '',
     containerClass: '',
     labelClass: '',
+    labelText: null,
 }
 
 export default CustomInput;

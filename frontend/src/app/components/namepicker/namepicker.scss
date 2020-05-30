@@ -8,6 +8,7 @@
 	&__title {
 		font-family: 'lovelyn';
 		font-size: 5em;
+		padding-bottom: 37px;
 	}
 	
 	&__bg {
@@ -18,7 +19,14 @@
 		background-repeat: no-repeat;
 	}
 
+	&__input {
+		width: 244px;
+	}
+
 	&__input-container {
-		margin-bottom: 91px;
+		margin-bottom: 41px;
+		max-width: 260px;
+		width: 100%;
+		min-width: 100%;
 	}
 }
