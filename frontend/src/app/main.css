@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Lovelyn';
+    src: local('Lovelyn'), url('../../assets/Lovelyn.ttf') format('truetype');
+  }
+
+body {
+    margin: 0;
+    display: flex;
+    flex: 1;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+#app {
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
+    justify-content: center;
+}

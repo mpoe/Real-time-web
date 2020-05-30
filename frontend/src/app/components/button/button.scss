@@ -1,0 +1,12 @@
+.button {
+    font-size: 3.5em;
+    font-family: 'lovelyn';
+    background-color: transparent;
+    border: none;
+    display: flex;
+    padding: 0 11px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

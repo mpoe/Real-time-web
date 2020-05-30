@@ -1,14 +1,28 @@
 // @ts-check
-import React, { Fragment } from 'react';
+import React from 'react';
 import './namepicker.scss';
 
+import bg from 'assets/bg-frontpage.png';
+// import bg from 'assets/frontpage-mockup.png';
+import Input from '../input';
+import Button from '../button';
+
 const NamePicker = ({ submit, handleInput, username }) => (
-	<Fragment>
-		<h1>Test</h1>
-		<form onSubmit={submit}>
-			<input value={username} name="username" onChange={handleInput} placeholder="choose a nickname" />
-		</form>
-	</Fragment>
+	<div className="namepicker__bg" style={{ backgroundImage:`url(${bg})` }}>
+		<div className="namepicker">
+			<h1 className="namepicker__title">Merchant</h1>
+			<Input
+				value={username}
+				name="username"
+				onChange={handleInput}
+				placeholder="nickname"
+				containerClass="namepicker__input-container"
+				className="namepicker__input"
+				labelText="NAME"
+			/>
+			<Button onClick={() => console.log('Hej')} text="play" />
+		</div>
+	</div>
 )
 
 export default NamePicker;
