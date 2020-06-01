@@ -20,7 +20,7 @@ const NamePicker = ({ submit, handleInput, username }) => (
 				className="namepicker__input"
 				labelText="NAME"
 			/>
-			<Button onClick={() => console.log('Hej')} text="play" />
+			<Button onClick={submit} text="play" className="namepicker__submit" />
 		</div>
 	</div>
 )

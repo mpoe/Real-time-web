@@ -7,7 +7,7 @@ import './button.scss';
 const CustomButton = ({ onClick, text, className }) => {
     return (
         <div>
-            <button className={classnames("button", className)} onClick={onClick}>{text}</button>
+            <button className={classnames(className)} onClick={onClick}>{text}</button>
         </div>
     )
 }
