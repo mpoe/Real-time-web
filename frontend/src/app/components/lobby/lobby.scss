@@ -1,0 +1,20 @@
+.lobby {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    &__button {
+        width: 450px;
+        border: 3px solid black;
+        border-radius: 5px;
+        margin-bottom: 16px;
+        &:focus {
+            outline: none;
+        }
+    }
+}

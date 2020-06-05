@@ -12,12 +12,12 @@
     &::placeholder {
         color: black;
         opacity: 1;
-        // text-transform: uppercase;
     }
 
     &__container {
         display: flex;
         flex: 1;
+        align-items: center;
     }
 
     &__label {
@@ -25,5 +25,8 @@
         flex: 1;
         font-family: 'lovelyn';
         font-size: 3em;
+    }
+    &:focus {
+        outline: none;
     }
 }

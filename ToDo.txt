@@ -19,7 +19,7 @@ Implement and use these libraries:
 🗸 set up eslint file
 ☐ use ts-check
 ☐ make app redirect if condition is not met
-☐ classnames
+🗸 classnames
 
 
 //BACKEND
