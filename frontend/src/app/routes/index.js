@@ -4,12 +4,14 @@ import { Route, Switch } from 'react-router-dom';
 import NamePicker from '../containers/NamePicker';
 import NotFound from '../containers/NotFound';
 import Lobby from '../containers/Lobby';
-import Game from '../containers/Game';
+import LobbyList from '../containers/LobbyList';
+import Room from '../containers/Room';
 
 const Routes = () => (
 	<Switch>
 		<Route exact path="/" component={NamePicker} />
-		<Route path="/lobby/:gameid" component={Game} />
+		<Route path="/room/:roomId" component={Room} />
+		<Route path="/lobby/browse" component={LobbyList} />
 		<Route exact path="/lobby" component={Lobby} />
 		<Route component={NotFound} />
 	</Switch>

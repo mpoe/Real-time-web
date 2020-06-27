@@ -4,12 +4,12 @@ import classnames from 'classnames';
 
 import Background from '../background';
 
-const Draft = () => {
+const Room = () => {
 	return (
 		<Background>
-			<div>Draft</div>
+			<h1>Hi</h1>
 		</Background>
 	);
 };
 
-export default Draft;
+export default Room;

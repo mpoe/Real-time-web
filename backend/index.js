@@ -8,44 +8,61 @@ const port = 8000;
 
 const dbcon = require('./db'); // connection to the database
 dbcon.connect((err) => {
-  console.log('connect');
+	console.log('connect');
 }); // connect to the database, this will happen on server start.
 
 server.listen(port, function () {
-  console.log('Server listening at port %d', port);
-  //fs.writeFile(__dirname + '/start.log', 'started', (error) => { console.log(error) });
+	console.log('Server listening at port %d', port);
+	//fs.writeFile(__dirname + '/start.log', 'started', (error) => { console.log(error) });
 });
 
-io.on('connection', (client) => {
-  // dbcon.test(); // inserts the clients id to the database (useless)
-  client.on('GET_ID_REQ', () => {
-    console.log(client.id);
-    client.emit('GET_ID_RES', client.id);
-  })
+io.on('connection', (client) => { // client === socket
+	// dbcon.test(); // inserts the clients id to the database (useless)
+	client.on('GET_ID_REQ', () => {
+		client.emit('GET_ID_RES', client.id);
+	})
 
-  client.on('SET_USERNAME_REQ', (username) => {
-    io.clients((error, clients) => {
-      if (error) throw error;
-      clients.map((cliId) => {
-        if(cliId !== client.id) {
-          if(io.sockets.connected[cliId].username === username) {
-            username = username + clients.length;
-          }
-        }
-      });
+	client.on('SET_USERNAME_REQ', (username) => {
+		io.clients((error, clients) => {
+			if (error) throw error;
+			clients.map((clientId) => {
+				if (clientId !== client.id) {
+					if (io.sockets.connected[clientId].username === username) {
+						username = username + clients.length;
+					}
+				}
+			});
 
 			client.username = username;
-      client.emit('SET_USERNAME_RES', username);
-    });
-  })
+			client.emit('SET_USERNAME_RES', username);
+		});
+	})
+
+	client.on('JOIN_ROOM', (roomId) => {
+		client.join(`room-${roomId}`);
+	})
+
+	client.on('GET_ROOMS', () => {
+		var res = [];
+		var rooms = io.sockets.adapter.rooms;
+		if (rooms) {
+			for (var room in rooms) {
+				const regex = /(room-[\d]+)/g;
+				if(room.match(regex)) {
+					res.push(room);
+				}
+			}
+		}
+		client.emit('GOT_ROOMS', res);
+	})
 
 
-  //client.broadcast.emit('user connected'); //? Not working
-  client.on('disconnect', (test) => { //event listener
-    // console.log('ABD');
-  })
+	//client.broadcast.emit('user connected'); //? Not working
+	client.on('disconnect', (test) => { //event listener
+		// console.log('ABD');
+	})
 
-  client.on('disconnecting', (test) => { //event listener
-    //console.log('DISCONNECT');
-  })
+	client.on('disconnecting', (test) => { //event listener
+		//console.log('DISCONNECT');
+	})
 });
