@@ -7,11 +7,10 @@ import { getClientID, setUserName } from '../api';
 import NamePicker from '../components/namepicker';
 
 class NamePickerContainer extends React.Component {
-
 	constructor(props) {
 		super(props);
 		this.state = { username: '' };
-	  }
+	}
 
 	componentDidMount() {
 		getClientID(); // On load of the app (first page!) - get the clientid from the backend
@@ -22,8 +21,8 @@ class NamePickerContainer extends React.Component {
 			this.submit(e);
 		}
 		this.setState({
-			username: e.target.value
-		})
+			username: e.target.value,
+		});
 	};
 
 	submit = (e) => {
@@ -48,15 +47,15 @@ class NamePickerContainer extends React.Component {
 
 NamePickerContainer.propTypes = {
 	history: PropTypes.shape({
-		push: PropTypes.func.isRequired,
-	})
+		push: PropTypes.func,
+	}).isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
 	state,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
 	/* sendTheAlert: () => {dispatch(ALERT_ACTION)} */
 });
 

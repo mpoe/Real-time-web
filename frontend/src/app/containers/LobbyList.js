@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import RequireName from '../hoc/requireName';
+
 import { getRooms } from '../api';
 import LobbyList from '../components/lobbyList';
 
@@ -30,4 +32,4 @@ const mapDispatchToProps = dispatch => ({
 	/* sendTheAlert: () => {dispatch(ALERT_ACTION)} */
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LobbyListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(RequireName('/lobby/browse')(LobbyListContainer));

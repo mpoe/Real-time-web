@@ -1,14 +1,15 @@
 // @ts-check
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import './namepicker.scss';
 
-import bg from 'assets/bg-frontpage.png';
-// import bg from 'assets/frontpage-mockup.png';
 import Input from '../input';
 import Button from '../button';
+import Background from '../background';
 
 const NamePicker = ({ submit, handleInput, username }) => (
-	<div className="namepicker__bg" style={{ backgroundImage:`url(${bg})` }}>
+	<Background>
 		<div className="namepicker">
 			<h1 className="namepicker__title">Merchant</h1>
 			<Input
@@ -22,7 +23,17 @@ const NamePicker = ({ submit, handleInput, username }) => (
 			/>
 			<Button onClick={submit} text="play" className="namepicker__submit" />
 		</div>
-	</div>
-)
+	</Background>
+);
+
+NamePicker.propTypes = {
+	submit: PropTypes.func.isRequired,
+	handleInput: PropTypes.func.isRequired,
+	username: PropTypes.string,
+};
+
+NamePicker.defaultProps = {
+	username: '',
+};
 
 export default NamePicker;

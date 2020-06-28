@@ -7,6 +7,9 @@ var fs = require('fs');
 const port = 8000;
 
 const dbcon = require('./db'); // connection to the database
+
+const users = {};
+
 dbcon.connect((err) => {
 	console.log('connect');
 }); // connect to the database, this will happen on server start.
@@ -27,13 +30,17 @@ io.on('connection', (client) => { // client === socket
 			if (error) throw error;
 			clients.map((clientId) => {
 				if (clientId !== client.id) {
-					if (io.sockets.connected[clientId].username === username) {
+					if (users[clientId].username === username) {
 						username = username + clients.length;
 					}
 				}
 			});
+			
+			users[client.id] = {
+				...users[client.id],
+				username
+			};
 
-			client.username = username;
 			client.emit('SET_USERNAME_RES', username);
 		});
 	})
@@ -45,16 +52,33 @@ io.on('connection', (client) => { // client === socket
 	client.on('GET_ROOMS', () => {
 		var res = [];
 		var rooms = io.sockets.adapter.rooms;
+		console.log(rooms);
+		console.log(users);
 		if (rooms) {
 			for (var room in rooms) {
 				const regex = /(room-[\d]+)/g;
 				if(room.match(regex)) {
-					res.push(room);
+					const enhancedRoom = rooms[room];
+					Object.keys(enhancedRoom.sockets).map((clientId) => getClientName(clientId))
+					console.log(room);
+					res.push(rooms[room]);
 				}
 			}
 		}
 		client.emit('GOT_ROOMS', res);
 	})
+
+	function getClientName(clientId) {
+		io.clients((error, clients) => {
+			console.log('clients', clients);
+			console.log(clientId);
+			clients.map((client) => {
+				if (clientId === client) {
+					console.log('asdasd', client);
+				}
+			});
+		});
+	}
 
 
 	//client.broadcast.emit('user connected'); //? Not working
