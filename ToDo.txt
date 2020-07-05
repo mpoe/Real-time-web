@@ -18,8 +18,15 @@ Implement and use these libraries:
 🗸 set up react-router
 🗸 set up eslint file
 ☐ use ts-check
-☐ make app redirect if condition is not met
+🗸 make app redirect if condition is not met
 🗸 classnames
+☐ Private lobby
+☐ public lobby
+☐ usernames from socket
+☐ Lobby pregame
+☐ draft
+☐ game
+
 
 
 //BACKEND
