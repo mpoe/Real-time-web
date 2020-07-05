@@ -3,7 +3,9 @@ import React from 'react';
 const LobbyList = ({ rooms }) => {
 	console.log(rooms);
 	return (
-		<div>{rooms}</div>
+		rooms.map(room => (
+			<div key={room.id}>{room.name}</div>
+		))
 	);
 };
 

@@ -1,5 +1,10 @@
 import openSocket from 'socket.io-client';
-import { setUsername, setUserid, setRoomList } from '../redux/actions/index';
+import {
+	setUsername,
+	setUserid,
+	setRoomList,
+	setRoom,
+} from '../redux/actions/index';
 
 import store from '../redux/reducers';
 
@@ -32,3 +37,15 @@ export function getRooms() {
 socket.on('GOT_ROOMS', (list) => {
 	store.dispatch(setRoomList(list));
 });
+
+export function createRoomRequest(roomInfo) {
+	socket.emit('GET_NEXT_ROOM_ID', roomInfo);
+}
+
+socket.on('GET_NEXT_ROOM_ID_RES', (roomId, roomInfo) => {
+	socket.emit('CREATE_ROOM', { roomId, roomSettings: roomInfo }); // must emit object, since socket.on cannot take more than 1 parameter.
+});
+
+socket.on('JOINED_ROOM', ((room) => {
+	store.dispatch(setRoom(room));
+}));

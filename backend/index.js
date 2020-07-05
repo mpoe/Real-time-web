@@ -10,8 +10,13 @@ const dbcon = require('./db'); // connection to the database
 
 const users = {};
 
+const rooms = {};
+
+let userNumber = 9000;
+let roomId = 44444;
+
 dbcon.connect((err) => {
-	console.log('connect');
+	// console.log('connect');
 }); // connect to the database, this will happen on server start.
 
 server.listen(port, function () {
@@ -20,7 +25,6 @@ server.listen(port, function () {
 });
 
 io.on('connection', (client) => { // client === socket
-	// dbcon.test(); // inserts the clients id to the database (useless)
 	client.on('GET_ID_REQ', () => {
 		client.emit('GET_ID_RES', client.id);
 	})
@@ -30,8 +34,9 @@ io.on('connection', (client) => { // client === socket
 			if (error) throw error;
 			clients.map((clientId) => {
 				if (clientId !== client.id) {
-					if (users[clientId].username === username) {
-						username = username + clients.length;
+					if (users[clientId] && (users[clientId].username === username)) {
+						username = username + userNumber;
+						userNumber++;
 					}
 				}
 			});
@@ -45,43 +50,43 @@ io.on('connection', (client) => { // client === socket
 		});
 	})
 
-	client.on('JOIN_ROOM', (roomId) => {
+	client.on('CREATE_ROOM', ({ roomId, roomSettings }) => {
 		client.join(`room-${roomId}`);
+		rooms[`room-${roomId}`] = {
+			...roomSettings,
+			id: roomId,
+		}
+		client.emit('JOINED_ROOM', rooms[`room-${roomId}`])
 	})
 
 	client.on('GET_ROOMS', () => {
 		var res = [];
-		var rooms = io.sockets.adapter.rooms;
-		console.log(rooms);
-		console.log(users);
-		if (rooms) {
-			for (var room in rooms) {
+		var socketRooms = io.sockets.adapter.rooms;
+		if (socketRooms) {
+			for (var room in socketRooms) {
 				const regex = /(room-[\d]+)/g;
 				if(room.match(regex)) {
-					const enhancedRoom = rooms[room];
-					Object.keys(enhancedRoom.sockets).map((clientId) => getClientName(clientId))
 					console.log(room);
-					res.push(rooms[room]);
+					const socketRoom = socketRooms[room];
+					const roomUsers = Object.keys(socketRoom.sockets).map((clientId) => getUserName(clientId))
+
+					let enhancedRoom = Object.assign(rooms[room], { users: roomUsers });
+					res.push(enhancedRoom);
 				}
 			}
 		}
 		client.emit('GOT_ROOMS', res);
 	})
 
-	function getClientName(clientId) {
-		io.clients((error, clients) => {
-			console.log('clients', clients);
-			console.log(clientId);
-			clients.map((client) => {
-				if (clientId === client) {
-					console.log('asdasd', client);
-				}
-			});
-		});
+	client.on('GET_NEXT_ROOM_ID', (roomInfo) => {
+		client.emit('GET_NEXT_ROOM_ID_RES', roomId, roomInfo);
+		roomId++;
+	})
+
+	function getUserName(clientId) {
+		return users[clientId];
 	}
 
-
-	//client.broadcast.emit('user connected'); //? Not working
 	client.on('disconnect', (test) => { //event listener
 		// console.log('ABD');
 	})
