@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { PROPTYPE_HISTORY } from '../constants/proptypes';
-import { getClientID, createRoomRequest } from '../api';
-import Lobby from '../components/lobby';
+import { createRoomRequest } from '../api';
 import RequireName from '../hoc/requireName';
 
-class LobbyContainer extends React.Component {
+import RoomCreate from '../components/roomCreate';
+
+class RoomCreateContainer extends React.Component {
 	static propTypes = {
 		state: PropTypes.shape({
 			room: PropTypes.shape({
@@ -20,8 +21,12 @@ class LobbyContainer extends React.Component {
 		history: PROPTYPE_HISTORY.isRequired,
 	}
 
-	componentDidMount() {
-		getClientID(); // On load of the app (first page!) - get the clientid from the backend
+	constructor(props) {
+		super(props);
+		this.state = {
+			password: '',
+			roomName: '',
+		};
 	}
 
 	componentDidUpdate(prevProps) {
@@ -34,27 +39,39 @@ class LobbyContainer extends React.Component {
 		}
 	}
 
-	onLobby = () => {
-		const { history: { push } } = this.props;
-		push('/lobby/browse');
+	onChangePassword = (e) => {
+		this.setState({
+			password: e.target.value,
+		});
 	}
 
-	onPublicRoom = () => {
-		const { state: { user: { id, username } } } = this.props;
-		createRoomRequest({ host: id, password: '', name: `${username}'s room` });
+	onCreateRoom = () => {
+		const { state: { user: { id } } } = this.props;
+		const { password, roomName } = this.state;
+		createRoomRequest({ host: id, password, name: roomName });
 	}
 
-	onPrivateRoom = () => {
+	onChangeRoomName = (e) => {
+		this.setState({
+			roomName: e.target.value,
+		});
+	}
+
+	onCancel = () => {
 		const { history: { push } } = this.props;
-		push('/lobby/create');
+		push('/lobby');
 	}
 
 	render() {
+		const { password, roomName } = this.state;
 		return (
-			<Lobby
-				onPublicRoom={this.onPublicRoom}
-				onPrivateRoom={this.onPrivateRoom}
-				onLobby={this.onLobby}
+			<RoomCreate
+				password={password}
+				roomName={roomName}
+				handlePassword={this.onChangePassword}
+				handleRoomName={this.onChangeRoomName}
+				handleCreate={this.onCreateRoom}
+				handleCancel={this.onCancel}
 			/>
 		);
 	}
@@ -68,4 +85,4 @@ const mapDispatchToProps = dispatch => ({
 	/* sendTheAlert: () => {dispatch(ALERT_ACTION)} */
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RequireName('/lobby')(LobbyContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(RequireName('/lobby/create')(RoomCreateContainer));

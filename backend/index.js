@@ -52,30 +52,17 @@ io.on('connection', (client) => { // client === socket
 
 	client.on('CREATE_ROOM', ({ roomId, roomSettings }) => {
 		client.join(`room-${roomId}`);
+		console.log(client.id);
 		rooms[`room-${roomId}`] = {
 			...roomSettings,
 			id: roomId,
+			users: [],
 		}
 		client.emit('JOINED_ROOM', rooms[`room-${roomId}`])
 	})
 
 	client.on('GET_ROOMS', () => {
-		var res = [];
-		var socketRooms = io.sockets.adapter.rooms;
-		if (socketRooms) {
-			for (var room in socketRooms) {
-				const regex = /(room-[\d]+)/g;
-				if(room.match(regex)) {
-					console.log(room);
-					const socketRoom = socketRooms[room];
-					const roomUsers = Object.keys(socketRoom.sockets).map((clientId) => getUserName(clientId))
-
-					let enhancedRoom = Object.assign(rooms[room], { users: roomUsers });
-					res.push(enhancedRoom);
-				}
-			}
-		}
-		client.emit('GOT_ROOMS', res);
+		client.emit('GOT_ROOMS', rooms);
 	})
 
 	client.on('GET_NEXT_ROOM_ID', (roomInfo) => {
@@ -83,7 +70,20 @@ io.on('connection', (client) => { // client === socket
 		roomId++;
 	})
 
-	function getUserName(clientId) {
+	client.on('JOIN_ROOM', (roomId) => {
+		client.join(`room-${roomId}`);
+		rooms[`room-${roomId}`] = {
+			...rooms[`room-${roomId}`],
+			users: [...rooms[`room-${roomId}`].users, getUser(client.id)],
+		}
+	})
+
+	client.on('LEAVE_ROOM', (roomInfo) => {
+		console.log(roomInfo);
+		console.log(rooms);
+	})
+
+	function getUser(clientId) {
 		return users[clientId];
 	}
 

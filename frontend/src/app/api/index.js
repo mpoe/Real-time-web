@@ -49,3 +49,7 @@ socket.on('GET_NEXT_ROOM_ID_RES', (roomId, roomInfo) => {
 socket.on('JOINED_ROOM', ((room) => {
 	store.dispatch(setRoom(room));
 }));
+
+export function leaveRoom(roomId, userId) {
+	socket.emit('LEAVE_ROOM', { roomId, userId });
+}

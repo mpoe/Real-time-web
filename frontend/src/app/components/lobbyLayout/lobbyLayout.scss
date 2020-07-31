@@ -1,0 +1,25 @@
+.lobby-layout {
+	&__wrapper {
+		display: flex;
+		justify-content: center;
+		height: 100%;
+	}
+	&__outer {
+		border-left: 2px solid goldenrod;
+		border-right: 2px solid goldenrod;
+		max-width: 60%;
+		height: 100%;
+		flex: 1;
+	}
+
+	&__inner {
+		margin: 0 5px;
+		border-left: 2px solid goldenrod;
+		border-right: 2px solid goldenrod;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		padding: 0 10%;
+	}
+}

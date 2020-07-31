@@ -1,0 +1,26 @@
+.room-info {
+	display: flex;
+	justify-content: space-between;
+	&__public {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.room-name {
+	font-size: 40px;
+	color: goldenrod;
+	text-decoration: none;
+}
+
+.room-users {
+	font-size: 32px;
+	color: goldenrod;
+	text-decoration: none;
+}
+
+.room-password {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

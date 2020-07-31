@@ -2,10 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { joinRoom, getClientID } from '../api';
+import { joinRoom, getClientID, leaveRoom } from '../api';
 
-import Game from '../components/game';
-import Draft from '../components/draft';
 import Room from '../components/room';
 import RequireName from '../hoc/requireName';
 
@@ -16,8 +14,17 @@ class RoomContainer extends React.Component {
 		joinRoom(roomId);
 	}
 
+	componentWillUnmount() {
+		const {
+			state: { user },
+			match: { params: { roomId } },
+		} = this.props;
+		leaveRoom(roomId, user.id);
+	}
+
 	render() {
 		const { match: { params: { roomId } } } = this.props;
+		console.log(this.props);
 		return (
 			<Room id={roomId} />
 		);

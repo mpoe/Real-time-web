@@ -15,5 +15,15 @@ button {
     &:hover {
         cursor: pointer;
         opacity: 0.5;
-    }
+	}
+}
+
+.button {
+	&--colored {
+		color: goldenrod;
+	}
+
+	&--small {
+		font-size: 2em;
+	}
 }
