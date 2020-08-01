@@ -1,15 +1,40 @@
-import React, { useEffect } from 'react'
+import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+
+import bg from 'assets/bg-lobby.png';
 
 import Background from '../background';
+import Header from '../header';
+import LobbyLayout from '../lobbyLayout';
+import Actions from '../roomActions';
 
-const Room = () => {
+import './room.scss';
+
+const Room = ({ room, startGame }) => {
+	console.log(room);
+	const host = room.users && room.users.find(user => user.id === room.host);
 	return (
-		<Background>
-			<h1>Hi</h1>
+		<Background src={bg}>
+			<LobbyLayout>
+				<Header title={room.name} />
+				<div className="room__info">
+					<span>{`${room.users && room.users.length} player(s) waiting`}</span>
+					<span>{`${host && host.username} is the host`}</span>
+				</div>
+				<div className="room__container">
+					{room.users && room.users.map(user => (
+						<span className="room__username">{user.username}</span>
+					))}
+				</div>
+				<Actions startGame={startGame} />
+			</LobbyLayout>
 		</Background>
 	);
+};
+
+Room.propTypes = {
+	room: PropTypes.shape({}).isRequired,
+	startGame: PropTypes.func.isRequired,
 };
 
 export default Room;

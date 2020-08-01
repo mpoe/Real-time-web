@@ -1,0 +1,23 @@
+.room {
+	&__info {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		& > span {
+			font-size: 1.5em;
+			color: goldenrod;
+		}
+	}
+
+	&__container {
+		display: flex;
+		width: 100%;
+		flex-direction: column;
+		flex: 1;
+	}
+
+	&__username {
+		font-size: 3em;
+		color: goldenrod;
+	}
+}

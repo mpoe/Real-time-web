@@ -32,3 +32,19 @@ a {
 	width: 20px;
 	color: goldenrod;
 }
+
+.bottom-actions {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	border-top: 2px solid goldenrod;
+	padding-bottom: 40px;
+}
+
+.bottom-action {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	border-top: 2px solid goldenrod;
+	padding-bottom: 40px;
+}

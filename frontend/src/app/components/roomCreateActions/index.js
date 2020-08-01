@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 
 import Button from '../button';
 
-import './roomCreateActions.scss';
-
 const LobbyActions = ({ onCancel, onCreate }) => (
-	<div className="room-create-actions">
+	<div className="bottom-actions">
 		<Button className="button--colored button--small" onClick={onCancel} text="cancel" />
 		<Button className="button--colored button--small" onClick={onCreate} text="create room" />
 	</div>

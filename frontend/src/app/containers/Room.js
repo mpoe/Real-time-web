@@ -22,17 +22,31 @@ class RoomContainer extends React.Component {
 		leaveRoom(roomId, user.id);
 	}
 
+	startGame = () => {
+		alert('Not implemented :(');
+	}
+
 	render() {
-		const { match: { params: { roomId } } } = this.props;
-		console.log(this.props);
+		const {
+			match: { params: { roomId } },
+			state: {
+				room: {
+					room,
+				},
+			},
+		} = this.props;
 		return (
-			<Room id={roomId} />
+			<Room id={roomId} room={room} startGame={this.startGame} />
 		);
 	}
 }
 
 RoomContainer.propTypes = {
-	state: PropTypes.shape({}).isRequired,
+	state: PropTypes.shape({
+		room: PropTypes.shape({
+			room: PropTypes.shape({}),
+		}),
+	}).isRequired,
 	match: PropTypes.shape({
 		params: PropTypes.shape({
 			roomId: PropTypes.string,

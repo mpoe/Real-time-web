@@ -7,6 +7,7 @@ var fs = require('fs');
 const port = 8000;
 
 const dbcon = require('./db'); // connection to the database
+const { Socket } = require('dgram');
 
 const users = {};
 
@@ -43,7 +44,8 @@ io.on('connection', (client) => { // client === socket
 			
 			users[client.id] = {
 				...users[client.id],
-				username
+				username,
+				id: client.id,
 			};
 
 			client.emit('SET_USERNAME_RES', username);
@@ -74,8 +76,10 @@ io.on('connection', (client) => { // client === socket
 		client.join(`room-${roomId}`);
 		rooms[`room-${roomId}`] = {
 			...rooms[`room-${roomId}`],
-			users: [...rooms[`room-${roomId}`].users, getUser(client.id)],
+			users: (rooms[`room-${roomId}`] ? [...rooms[`room-${roomId}`].users, getUser(client.id)] : [getUser(client.id)] ),
 		}
+		client.emit('JOINED_ROOM', rooms[`room-${roomId}`])
+		client.to(`room-${roomId}`).emit('JOINED_ROOM', rooms[`room-${roomId}`]);
 	})
 
 	client.on('LEAVE_ROOM', (roomInfo) => {
