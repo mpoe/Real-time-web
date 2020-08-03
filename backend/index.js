@@ -1,29 +1,28 @@
 // @ts-check
 var app = require('express')();
 var server = require('http').Server(app);
-var io = require('socket.io')(server, { origins: 'localhost:* http://localhost:* http://localhost:*' }); //https://github.com/socketio/socket.io-client/issues/641#issuecomment-44756529
+var cors = require('cors');
+app.use(cors());
+var io = require('socket.io')(server, { origins: 'localhost:* http://localhost:* http://localhost:* 80.210.66.27:* http://80.210.66.27:* http://80.210.66.27:* '}); //https://github.com/socketio/socket.io-client/issues/641#issuecomment-44756529
+// var io = require('socket.io')(server);
+
 var fs = require('fs');
 
 const port = 8000;
 
 const dbcon = require('./db'); // connection to the database
-const { Socket } = require('dgram');
 
 const users = {};
 
 const rooms = {};
 
-let userNumber = 9000;
+let userNumber = 10000;
 let roomId = 44444;
 
 dbcon.connect((err) => {
 	// console.log('connect');
 }); // connect to the database, this will happen on server start.
 
-server.listen(port, function () {
-	console.log('Server listening at port %d', port);
-	//fs.writeFile(__dirname + '/start.log', 'started', (error) => { console.log(error) });
-});
 
 io.on('connection', (client) => { // client === socket
 	client.on('GET_ID_REQ', () => {
@@ -98,4 +97,9 @@ io.on('connection', (client) => { // client === socket
 	client.on('disconnecting', (test) => { //event listener
 		//console.log('DISCONNECT');
 	})
+});
+
+server.listen(port, function () {
+	console.log('Server listening at port %d', port);
+	//fs.writeFile(__dirname + '/start.log', 'started', (error) => { console.log(error) });
 });
