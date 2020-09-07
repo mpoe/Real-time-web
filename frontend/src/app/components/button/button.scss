@@ -1,0 +1,29 @@
+button {
+    font-size: 3.5em;
+    font-family: 'lovelyn';
+    background-color: transparent;
+    border: none;
+    display: flex;
+    padding: 0 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        cursor: pointer;
+        opacity: 0.5;
+	}
+}
+
+.button {
+	&--colored {
+		color: goldenrod;
+	}
+
+	&--small {
+		font-size: 2em;
+	}
+}

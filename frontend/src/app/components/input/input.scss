@@ -1,0 +1,32 @@
+.textinput {
+    padding: 3px 9px;
+    border-color: black;
+    border-width: 2px;
+    background-color: transparent;
+    height: 50px;
+    display: flex;
+    flex: 1;
+    font-size: 2em;
+    font-family: 'lovelyn';
+
+    &::placeholder {
+        color: black;
+        opacity: 1;
+    }
+
+    &__container {
+        display: flex;
+        flex: 1;
+        align-items: center;
+    }
+
+    &__label {
+        display: flex;
+        flex: 1;
+        font-family: 'lovelyn';
+        font-size: 3em;
+    }
+    &:focus {
+        outline: none;
+    }
+}

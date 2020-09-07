@@ -1,0 +1,25 @@
+.room-create {
+	&__input-container {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	&__input-label {
+		font-size: 2em;
+		color: goldenrod;
+	}
+
+	&__input {
+		font-size: 3em;
+		border-color: goldenrod;
+		color: goldenrod;
+		&::placeholder {
+			color: goldenrod;
+		}
+	}
+
+	&__container {
+		width: 100%;
+		height: 100%;
+	}
+}

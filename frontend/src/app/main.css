@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'Lovelyn';
+    src: local('Lovelyn'), url('../../assets/Lovelyn.ttf') format('truetype');
+  }
+
+body {
+    margin: 0;
+    display: flex;
+    flex: 1;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+span, h1, h2, h3, h4, h5, h6, button, p {
+	font-family: 'lovelyn';
+	margin: 0;
+}
+
+#app {
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
+    justify-content: center;
+}
+
+a {
+	text-decoration: none;
+}
+
+.icon {
+	height: 20px;
+	width: 20px;
+	color: goldenrod;
+}
+
+.bottom-actions {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	border-top: 2px solid goldenrod;
+	padding-bottom: 40px;
+}
+
+.bottom-action {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	border-top: 2px solid goldenrod;
+	padding-bottom: 40px;
+}

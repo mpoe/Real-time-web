@@ -1,0 +1,15 @@
+.lobby-header {
+	color: goldenrod;
+	font-size: 40px;
+	font-weight: 400;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	padding: 45px 0 10px;
+	border-bottom: 2px solid goldenrod;
+    width: 100%;
+	text-align: center;
+	
+	&--80 {
+		width: 80%;
+	}
+}
