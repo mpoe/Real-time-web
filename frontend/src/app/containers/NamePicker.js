@@ -1,7 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { withRouter } from "react-router";
 
 import { getClientID, setUserName } from '../api';
 import NamePicker from '../components/namepicker';
@@ -52,12 +50,4 @@ NamePickerContainer.propTypes = {
 	})
 };
 
-const mapStateToProps = (state) => ({
-	state,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-	/* sendTheAlert: () => {dispatch(ALERT_ACTION)} */
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NamePickerContainer));
+export default NamePickerContainer;
